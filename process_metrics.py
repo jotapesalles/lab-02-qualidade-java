@@ -1,41 +1,68 @@
 import requests
-import json
+from dotenv import load_dotenv
 import csv
+import os
 
-# Configurações
-GITHUB_TOKEN = "SEU_TOKEN_AQUI"
-HEADERS = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
-GITHUB_GRAPHQL_URL = "https://api.github.com/graphql"
-QUERY = """
-{
-  search(query: "language:Java", type: REPOSITORY, first: 10) {
-    nodes {
-      ... on Repository {
-        name
-        owner {
-          login
-        }
-        stargazers {
-          totalCount
-        }
-        releases {
-          totalCount
-        }
-        createdAt
-        url
-      }
-    }
-  }
+load_dotenv()
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+HEADERS = {
+    "Authorization": f"token {GITHUB_TOKEN}",
+    "Accept": "application/vnd.github.v3+json"
 }
-"""
 
-def fetch_repositories():
-    response = requests.post(GITHUB_GRAPHQL_URL, json={"query": QUERY}, headers=HEADERS)
-    if response.status_code == 200:
-        return response.json()["data"]["search"]["nodes"]
-    else:
-        print("Erro ao buscar dados:", response.text)
-        return []
+GITHUB_GRAPHQL_URL = "https://api.github.com/graphql"
+
+def get_query(after_cursor=None, first=10):
+    after = f', after: "{after_cursor}"' if after_cursor else ''
+    return f"""
+    {{
+      search(query: "language:Java", type: REPOSITORY, first: {first}{after}) {{
+        edges {{
+          cursor
+          node {{
+            ... on Repository {{
+              name
+              owner {{
+                login
+              }}
+              stargazers {{
+                totalCount
+              }}
+              releases {{
+                totalCount
+              }}
+              createdAt
+              url
+            }}
+        }}
+      }}
+      pageInfo {{
+        hasNextPage
+        endCursor
+      }}
+    }}
+    }}"""
+
+def fetch_repositories(target_count=1000):
+    print("Coleta dados de repositórios do GitHub.")
+    repos = []
+    after_cursor = None
+    consulta = 1
+
+    while len(repos) < target_count:
+        print(f"Consulta #{consulta} com after_cursor: {after_cursor}")
+        response = requests.post(GITHUB_GRAPHQL_URL, json={"query": get_query(after_cursor)}, headers=HEADERS)
+        if response.status_code == 200:
+            search_data = response.json()["data"]["search"]
+            nodes = [edge["node"] for edge in response.json()["data"]["search"]["edges"]]
+            repos.extend(nodes)
+            after_cursor = search_data['pageInfo']['endCursor']
+            consulta += 1
+        else:
+            print("Erro ao buscar dados:", response.text)
+            break
+    print(f"Total de repositórios coletados: {len(repos)}")
+    return repos
 
 def save_to_csv(repos):
     with open("repositorios_java.csv", "w", newline="", encoding="utf-8") as file:
