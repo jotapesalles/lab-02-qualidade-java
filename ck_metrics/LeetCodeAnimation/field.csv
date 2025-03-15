@@ -1,0 +1,9 @@
+file,class,method,variable,usage
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,push/1[int],_data,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,push/1[int],_min,5
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,pop/0,_data,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,pop/0,_min,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,getMin/0,_min,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,top/0,_data,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,MinStack/0,_data,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,MinStack/0,_min,1

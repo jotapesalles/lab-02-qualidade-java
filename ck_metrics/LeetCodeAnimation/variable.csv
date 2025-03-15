@@ -1,0 +1,16 @@
+file,class,method,variable,usage
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0155-min-stack/Code/1.java,MinStack,push/1[int],x,5
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/1.java,Solution1,"searchInsert/2[int[],int]",i,4
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/1.java,Solution1,"searchInsert/2[int[],int]",nums,2
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/1.java,Solution1,"searchInsert/2[int[],int]",target,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/2.java,Solution2,"searchInsert/2[int[],int]",left,4
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/2.java,Solution2,"searchInsert/2[int[],int]",mid,3
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/2.java,Solution2,"searchInsert/2[int[],int]",right,3
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/2.java,Solution2,"searchInsert/2[int[],int]",nums,5
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0035-search-insert-position/Code/2.java,Solution2,"searchInsert/2[int[],int]",target,2
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0946--validate-stack-sequences/Code/1.java,Solution,"validateStackSequences/2[int[],int[]]",popped,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0946--validate-stack-sequences/Code/1.java,Solution,"validateStackSequences/2[int[],int[]]",stack,5
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0946--validate-stack-sequences/Code/1.java,Solution,"validateStackSequences/2[int[],int[]]",x,1
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0946--validate-stack-sequences/Code/1.java,Solution,"validateStackSequences/2[int[],int[]]",j,3
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0946--validate-stack-sequences/Code/1.java,Solution,"validateStackSequences/2[int[],int[]]",pushed,2
+/home/jota/classroom/lab-02-qualidade-java/repos/LeetCodeAnimation/0946--validate-stack-sequences/Code/1.java,Solution,"validateStackSequences/2[int[],int[]]",N,1

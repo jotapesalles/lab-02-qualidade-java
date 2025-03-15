@@ -33,7 +33,7 @@ Antes de executar o projeto, você precisa instalar:
    ```
 3. Execute o script principal:
    ```sh
-   python script.py
+   python main.py
    ```
 4. Após a execução, os seguintes arquivos serão gerados:
    - `repositorios_java.csv`: Lista dos repositórios coletados.
@@ -43,6 +43,7 @@ Antes de executar o projeto, você precisa instalar:
 ```
 /
 ├── main.py          # Script principal
+├── colect_repos.py  # Script para coletar os repositórios
 ├── ck.jar            # Ferramenta CK
 ├── repositorios/     # Diretório onde os repositórios serão clonados
 ├── repositorios_java.csv  # Lista dos repositórios coletados

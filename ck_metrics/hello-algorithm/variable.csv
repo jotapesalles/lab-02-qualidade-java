@@ -1,0 +1,9 @@
+file,class,method,variable,usage
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/20_NumericStrings/Solution1.java,Solution1,isNumeric/1[char[]],str,11
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/20_NumericStrings/Solution1.java,Solution1,isNumeric/1[char[]],flag,5
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/20_NumericStrings/Solution1.java,Solution1,scanUnsignedInteger/1[char[]],str,3
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/20_NumericStrings/Solution1.java,Solution1,scanUnsignedInteger/1[char[]],start,1
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/20_NumericStrings/Solution1.java,Solution1,scanInteger/1[char[]],str,4
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/10_04_RectCover/Solution.java,Solution,RectCover/1[int],res,6
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/10_04_RectCover/Solution.java,Solution,RectCover/1[int],i,5
+/home/jota/classroom/lab-02-qualidade-java/repos/hello-algorithm/算法读物/剑指offer/10_04_RectCover/Solution.java,Solution,RectCover/1[int],target,5

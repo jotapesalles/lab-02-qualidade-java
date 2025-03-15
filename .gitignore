@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# CK git clone
+ck/
+
+# Repos git clone
+repos/
