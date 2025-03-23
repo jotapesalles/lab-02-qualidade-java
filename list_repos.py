@@ -65,17 +65,34 @@ def fetch_repositories(target_count=1000):
     return repos
 
 def save_to_csv(repos):
-    with open("repos_java.csv", "w", newline="", encoding="utf-8") as file:
+    with open("process_metrics.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["Nome", "Dono", "Estrelas", "Releases", "Criado em", "URL"])
-        for repo in repos:
-            writer.writerow([repo["name"], repo["owner"]["login"], repo["stargazers"]["totalCount"], 
-                             repo["releases"]["totalCount"], repo["createdAt"], repo["url"]])
+        # Adiciona o cabeçalho com o campo "Posição"
+        writer.writerow(["Posição", "Nome", "Dono", "Estrelas", "Releases", "Criado em", "URL"])
+        
+        # Itera sobre a lista de repositórios com enumerate para obter a posição
+        for posicao, repo in enumerate(repos, start=1):
+            writer.writerow([
+                posicao,
+                repo["name"],
+                repo["owner"]["login"],
+                repo["stargazers"]["totalCount"],
+                repo["releases"]["totalCount"],
+                repo["createdAt"],
+                repo["url"]
+            ])
 
-if __name__ == "__main__":
-    repositories = fetch_repositories()
-    if repositories:
-        save_to_csv(repositories)
-        print("Dados salvos em repos_java.csv")
+def main():
+    repos_java_path = os.path.join("process_metrics.csv")
+    if not os.path.exists(repos_java_path):
+      repositories = fetch_repositories()
+      if repositories:
+          save_to_csv(repositories)
+          print("Dados salvos em process_metrics.csv")
+      else:
+          print("Nenhum dado coletado.")
     else:
-        print("Nenhum dado coletado.")
+      print("Repositórios já listados.")
+      
+if __name__ == "__main__":
+    main()

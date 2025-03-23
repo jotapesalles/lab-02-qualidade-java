@@ -36,18 +36,18 @@ Antes de executar o projeto, você precisa instalar:
    python main.py
    ```
 4. Após a execução, os seguintes arquivos serão gerados:
-   - `repositorios_java.csv`: Lista dos repositórios coletados.
-   - `ck_results.csv`: Resultados da análise de métricas.
+   - `process_metrics.csv`: Lista dos repositórios coletados e com métricas de processo.
+   - `quality_metrics.csv`: Resultados da análise de métricas de qualidade.
 
 ## Estrutura do Projeto
 ```
 /
 ├── main.py          # Script principal
-├── colect_repos.py  # Script para coletar os repositórios
-├── ck.jar            # Ferramenta CK
-├── repositorios/     # Diretório onde os repositórios serão clonados
-├── repositorios_java.csv  # Lista dos repositórios coletados
-├── ck_results.csv    # Resultados da análise
+├── list_repos.py    # Script para coletar os repositórios
+├── ck.jar           # Ferramenta CK
+├── repos/           # Diretório onde os repositórios serão clonados
+├── process_metrics.csv  # Lista dos repositórios coletados
+├── quality_metrics.csv    # Resultados da análise
 └── README.md         # Este arquivo
 ```
 
