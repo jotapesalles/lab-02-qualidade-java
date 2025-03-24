@@ -42,23 +42,24 @@ Antes de executar o projeto, você precisa instalar:
 ## Estrutura do Projeto
 ```
 /
-├── main.py          # Script principal
-├── list_repos.py    # Script para coletar os repositórios
-├── ck.jar           # Ferramenta CK
-├── repos/           # Diretório onde os repositórios serão clonados
-├── process_metrics.csv  # Lista dos repositórios coletados
-├── quality_metrics.csv    # Resultados da análise
-└── README.md         # Este arquivo
+├── ck.jar              # Ferramenta CK
+├── list_repos.py       # Script para apenas coletar os repositórios
+├── main.py             # Script principal
+├── process_metrics.csv # Lista dos repositórios coletados e com métricas de processos 
+├── quality_metrics.csv # Resultados da análise de qualidade
+├── README.md           # Manual do Projeto
+└── Relatório.pdf       # Relatório Final do Projeto
 ```
 
 ## Métricas de Qualidade Coletadas
+
 - **CBO (Coupling Between Objects)**: Acoplamento entre objetos.
 - **DIT (Depth of Inheritance Tree)**: Profundidade da árvore de herança.
 - **LCOM (Lack of Cohesion of Methods)**: Falta de coesão dos métodos.
 
 ## Autor
+- Enzo Barcelos Rios Ferreira
+- Igor Miranda Santos
 - João Paulo de Sales Pimenta
-- Enzo
-- Igor
 
 

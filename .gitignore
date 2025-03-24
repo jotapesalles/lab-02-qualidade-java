@@ -176,5 +176,11 @@ cython_debug/
 # CK git clone
 ck/
 
+# CK metrics
+ck_metrics/
+
 # Repos git clone
 repos/
+
+# IDEA settings
+.idea/
