@@ -11,7 +11,12 @@ def clone_repo(url, repo_name):
     repo_path = os.path.join("repos", repo_name)
     if not os.path.exists(repo_path):
         print(f"Clonando repositório: {repo_name}...")
-        subprocess.run(["git", "clone", url + ".git", repo_path], check=True)
+        try:
+            subprocess.run(["git", "clone", url + ".git", repo_path], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Erro ao clonar repositório {repo_name}: {e}")
+            print("Pulando este repositório e continuando com o próximo...")
+            return None
     return repo_path
 
 def process_ck_metrics(repo_path, repo_name):
@@ -22,10 +27,10 @@ def process_ck_metrics(repo_path, repo_name):
         print(f"Executando CK para análise de métricas em {repo_name}...")
         try:
             subprocess.run(
-                ["java", "-jar", os.path.abspath("ck.jar"), os.path.abspath(repo_path), "false", "0"], 
-                cwd=ck_repo_metrics_path,
-                check=True
-            )
+    ["java", "-jar", os.path.abspath("ck.jar"), os.path.abspath(repo_path), "false", "0"], 
+    cwd=ck_repo_metrics_path,
+    check=True
+)
             print(f"Métricas CK salvas em {ck_repo_metrics_path}")
         except subprocess.CalledProcessError as e:
             print(f"Erro ao executar CK em {repo_name}: {e}")
@@ -83,9 +88,10 @@ def calculate_metrics(repo_position, repo_name, ck_repo_metrics_path):
 def delete_repo(repo_path):
     """Apaga o repositório clonado após o processamento."""
     if os.path.exists(repo_path):
-        print(f"Apagando repositório {repo_path}...")
-        shutil.rmtree(repo_path)
-        print(f"Repositório {repo_path} apagado.")
+        print(f"Pulando exclusão de {repo_path} para evitar erros de permissão.")
+        # Comentando a exclusão para evitar erros de permissão
+        # shutil.rmtree(repo_path)
+        # print(f"Repositório {repo_path} apagado.")
 
 def is_repo_processed(repo_name, output_file):
     """Verifica se o repositório já foi processado e está no arquivo de saída."""
@@ -131,38 +137,46 @@ def main():
 
         # Processa cada repositório
         for row in reader:
-            posicao, nome, dono, estrelas, releases, criado_em, url = row
+            try:
+                posicao, nome, dono, estrelas, releases, criado_em, url = row
 
-            # Verifica se o repositório já foi processado (no arquivo CSV)
-            if is_repo_processed(nome, output_file):
-                print(f"Repositório {nome} já foi processado. Pulando...")
-                continue
+                # Verifica se o repositório já foi processado (no arquivo CSV)
+                if is_repo_processed(nome, output_file):
+                    print(f"Repositório {nome} já foi processado. Pulando...")
+                    continue
 
-            # Verifica se o repositório já existe na pasta ck_metrics
-            ck_repo_metrics_path = os.path.join("ck_metrics", nome)
-            if os.path.exists(ck_repo_metrics_path):
-                print(f"Repositório {nome} já existe em ck_metrics. Processando métricas...")
-                # Apenas processa as métricas, sem executar o CK novamente
+                # Verifica se o repositório já existe na pasta ck_metrics
+                ck_repo_metrics_path = os.path.join("ck_metrics", nome)
+                if os.path.exists(ck_repo_metrics_path):
+                    print(f"Repositório {nome} já existe em ck_metrics. Processando métricas...")
+                    # Apenas processa as métricas, sem executar o CK novamente
+                    metrics = calculate_metrics(posicao, nome, ck_repo_metrics_path)
+                    if metrics:
+                        append_metrics_to_csv(metrics, output_file)
+                        print(f"Métricas de {nome} adicionadas ao arquivo {output_file}.")
+                    continue
+
+                # Se não existir em ck_metrics, clona o repositório e executa o CK
+                repo_path = clone_repo(url, nome)
+                if repo_path is None:
+                    continue  # Pula para o próximo repositório se o clone falhar
+                
+                ck_repo_metrics_path = process_ck_metrics(repo_path, nome)
+
+                # Calcula as métricas
                 metrics = calculate_metrics(posicao, nome, ck_repo_metrics_path)
                 if metrics:
+                    # Adiciona as métricas ao arquivo CSV
                     append_metrics_to_csv(metrics, output_file)
                     print(f"Métricas de {nome} adicionadas ao arquivo {output_file}.")
-                continue
 
-            # Se não existir em ck_metrics, clona o repositório e executa o CK
-            repo_path = clone_repo(url, nome)
-            ck_repo_metrics_path = process_ck_metrics(repo_path, nome)
-
-            # Calcula as métricas
-            metrics = calculate_metrics(posicao, nome, ck_repo_metrics_path)
-            if metrics:
-                # Adiciona as métricas ao arquivo CSV
-                append_metrics_to_csv(metrics, output_file)
-                print(f"Métricas de {nome} adicionadas ao arquivo {output_file}.")
-
-            # Apaga o repositório clonado (se foi clonado)
-            if os.path.exists(repo_path):
-                delete_repo(repo_path)
+                # Apaga o repositório clonado (se foi clonado)
+                if os.path.exists(repo_path):
+                    delete_repo(repo_path)
+                    
+            except Exception as e:
+                print(f"Erro ao processar o repositório {nome if 'nome' in locals() else 'desconhecido'}: {e}")
+                print("Continuando com o próximo repositório...")
 
     print("Processo concluído!")
 
