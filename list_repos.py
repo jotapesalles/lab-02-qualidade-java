@@ -33,6 +33,7 @@ def get_query(after_cursor=None, first=10):
               }}
               createdAt
               url
+              diskUsage
             }}
         }}
       }}
@@ -42,6 +43,7 @@ def get_query(after_cursor=None, first=10):
       }}
     }}
     }}"""
+
 
 def fetch_repositories(target_count=1000):
     print("Coleta dados de repositórios do GitHub.")
@@ -68,7 +70,7 @@ def save_to_csv(repos):
     with open("process_metrics.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         # Adiciona o cabeçalho com o campo "Posição"
-        writer.writerow(["Posição", "Nome", "Dono", "Estrelas", "Releases", "Criado em", "URL"])
+        writer.writerow(["Posição", "Nome", "Dono", "Estrelas", "Releases", "Criado em", "Tamanho (KB)", "URL"])
         
         # Itera sobre a lista de repositórios com enumerate para obter a posição
         for posicao, repo in enumerate(repos, start=1):
@@ -79,6 +81,7 @@ def save_to_csv(repos):
                 repo["stargazers"]["totalCount"],
                 repo["releases"]["totalCount"],
                 repo["createdAt"],
+                repo["diskUsage"],
                 repo["url"]
             ])
 

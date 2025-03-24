@@ -113,7 +113,7 @@ def calculate_metrics(repo_position, repo_name, ck_repo_metrics_path):
     # Calcula as métricas
     return {
         "Popularidade": repo_position,
-        "Repositório": repo_name,
+        "Nome": repo_name,
         "CBO_Média": media(cbo_list),
         "CBO_Mediana": mediana(cbo_list),
         "CBO_Desvio_Padrão": desvio_padrao(cbo_list),
@@ -152,7 +152,7 @@ def append_metrics_to_csv(metrics, output_file):
     file_exists = os.path.exists(output_file)
     with open(output_file, "a", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=[
-            "Popularidade", "Repositório", "CBO_Média", "CBO_Mediana", "CBO_Desvio_Padrão",
+            "Popularidade", "Nome", "CBO_Média", "CBO_Mediana", "CBO_Desvio_Padrão",
             "DIT_Média", "DIT_Mediana", "DIT_Desvio_Padrão",
             "LCOM_Média", "LCOM_Mediana", "LCOM_Desvio_Padrão"
         ])
